@@ -24,11 +24,14 @@ import streamlit as st
 from memory import MemoryManager
 from wingman import get_wingman_response
 
-BACKEND_URL = os.environ.get("WINGMAN_BACKEND_URL", "http://127.0.0.1:8000")
-NONE_OPTION = "— none —"
+BACKEND_URL = st.secrets.get(
+    "BACKEND_URL",
+    os.getenv("BACKEND_URL", "http://localhost:8000"),
+)NONE_OPTION = "— none —"
 
 st.set_page_config(page_title="Sparkeefy Wingman v0", page_icon="❤️")
-st.title("❤️ Sparkeefy AI Wingman — v0 ❤️")
+st.title("💙 Sparkeefy Wingman")
+st.caption("Relationship memory assistant.")
 
 mm = MemoryManager()
 relationships = mm.list_relationships() or ["Aisha"]
@@ -45,14 +48,15 @@ def backend_health() -> dict:
 
 
 HEALTH = backend_health()
-USE_BACKEND = HEALTH["alive"]
+USE_BACKEND = HEALTH.get("alive", False)
 
 
 def call_chat(relationship: str, message: str) -> dict:
     if USE_BACKEND:
-        r = requests.post(f"{BACKEND_URL}/chat", json={"relationship": relationship, "message": message}, timeout=40)
+        r = requests.post(f"{BACKEND_URL}/chat", json={"relationship": relationship, "message": message}, timeout=90)
         if r.status_code != 200:
-            raise RuntimeError(r.json())
+            detail = r.json().get("detail", "Backend error")
+            raise RuntimeError(detail)
         return r.json()
     api_key = os.environ.get("DEEPSEEK_API_KEY")
     result = get_wingman_response(relationship, message, api_key=api_key, mock=not api_key, memory_manager=mm)
@@ -184,7 +188,14 @@ if relationship is None:
 state_key = f"messages_{relationship}"
 if state_key not in st.session_state:
     if USE_BACKEND:
-        hist_resp = requests.get(f"{BACKEND_URL}/history/{relationship}", timeout=5).json()
+        response = requests.get(
+            f"{BACKEND_URL}/history/{relationship}",
+            timeout=5,
+        )
+
+        response.raise_for_status()
+
+        hist_resp = response.json()
         st.session_state[state_key] = hist_resp["history"]
     else:
         st.session_state[state_key] = mm.get_full_history(relationship)

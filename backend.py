@@ -29,6 +29,7 @@ app = FastAPI(title="Sparkeefy AI Wingman v0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # fine for local v0 demo; tighten before any real deployment
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
