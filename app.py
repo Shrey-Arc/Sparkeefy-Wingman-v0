@@ -24,9 +24,9 @@ import streamlit as st
 from memory import MemoryManager
 from wingman import get_wingman_response
 
-BACKEND_URL = st.secrets.get(
-    "BACKEND_URL",
-    os.getenv("BACKEND_URL", "http://localhost:8000"),
+BACKEND_URL = (
+    st.secrets.get("BACKEND_URL", None)
+    or os.getenv("BACKEND_URL", "http://localhost:8000")
 )
 NONE_OPTION = "— none —"
 
@@ -35,8 +35,20 @@ st.title("💙 Sparkeefy Wingman")
 st.caption("Relationship memory assistant.")
 
 mm = MemoryManager()
-relationships = mm.list_relationships() or ["Aisha"]
 
+DEV_MODE = os.getenv("DEV_MODE", "false").lower() == "true"
+
+relationships = mm.list_relationships()
+
+# Safe fallback chain:
+# 1. real memory personas
+# 2. dev seed persona (Aisha)
+# 3. empty list (production cold start)
+if not relationships:
+    if DEV_MODE:
+        relationships = ["Aisha"]
+    else:
+        relationships = []
 
 def backend_health() -> dict:
     try:
@@ -49,14 +61,17 @@ def backend_health() -> dict:
 
 
 HEALTH = backend_health()
-USE_BACKEND = HEALTH.get("alive", False)
+USE_BACKEND = bool(HEALTH.get("alive"))
 
 
 def call_chat(relationship: str, message: str) -> dict:
     if USE_BACKEND:
         r = requests.post(f"{BACKEND_URL}/chat", json={"relationship": relationship, "message": message}, timeout=90)
         if r.status_code != 200:
-            detail = r.json().get("detail", "Backend error")
+            try:
+                detail = r.json().get("detail", "Backend error")
+            except Exception:
+                detail = r.text or "Backend error"
             raise RuntimeError(detail)
         return r.json()
     api_key = os.environ.get("DEEPSEEK_API_KEY")
@@ -187,7 +202,7 @@ if relationship is None:
 
 # ---- Load / init this relationship's chat thread ----
 state_key = f"messages_{relationship}"
-if state_key not in st.session_state:
+if state_key not in st.session_state or not isinstance(st.session_state[state_key], list):
     if USE_BACKEND:
         response = requests.get(
             f"{BACKEND_URL}/history/{relationship}",
@@ -197,7 +212,7 @@ if state_key not in st.session_state:
         response.raise_for_status()
 
         hist_resp = response.json()
-        st.session_state[state_key] = hist_resp["history"]
+        st.session_state[state_key] = hist_resp.get("history", [])
     else:
         st.session_state[state_key] = mm.get_full_history(relationship)
 
@@ -214,7 +229,10 @@ user_input = st.chat_input(f"Message about {relationship}...")
 if user_input:
     with st.chat_message("user"):
         st.write(user_input)
-    messages.append({"role": "user", "content": user_input})
+    messages.append({
+        "role": "user",
+        "content": str(user_input).strip()
+    })
 
     with st.chat_message("assistant"):
         with st.spinner("thinking..."):
@@ -234,7 +252,10 @@ if user_input:
                 st.caption("⚡ served from cache — no API call made")
 
             st.write(out["wingman_response"])
-            messages.append({"role": "assistant", "content": out["wingman_response"]})
+            messages.append({
+                "role": "assistant",
+                "content": str(out.get("wingman_response", "")).strip()
+            })
 
             if out.get("energy_read"):
                 st.caption(f"Energy read: {out['energy_read']}")
@@ -260,12 +281,12 @@ if user_input:
                 for i, cand in enumerate(candidates):
                     c1, c2, c3 = st.columns([3, 1, 1])
                     c1.write(f"**{cand['category']}**: {cand['value']}")
-                    if c2.button("✅ Remember", key=f"approve_{relationship}_{len(messages)}_{i}"):
+                    if c2.button("✅ Remember", key=f"approve_{relationship}_{i}_{cand['category']}_{cand['value']}"):
                         success, error = approve_candidate(relationship, cand["category"], cand["value"])
                         if success:
                             st.toast(f"Saved: {cand['value']}")
                             st.rerun()
                         else:
                             st.error(f"Didn't save — {error}")
-                    if c3.button("✖️ Discard", key=f"discard_{relationship}_{len(messages)}_{i}"):
+                    if c3.button("✖️ Discard", key=f"discard_{relationship}_{i}_{cand['category']}_{cand['value']}"):
                         st.toast("Discarded")
