@@ -171,10 +171,6 @@ python3 cli_chat.py Aisha "morning!" --history               # opt into real con
 
 ## Model used: DeepSeek V4 Flash
 
-**Not V3.1** — `deepseek-chat` (the old V3.1-era alias) is being retired by
-DeepSeek on 2026-07-24. V4 Flash is the current model at the same price
-point with native JSON-mode support.
-
 **Why:**
 - $0.14/M input, $0.28/M output (cache-miss). The static persona prompt is
   byte-identical across calls, so it hits DeepSeek's automatic prompt cache
