@@ -27,7 +27,8 @@ from wingman import get_wingman_response
 BACKEND_URL = st.secrets.get(
     "BACKEND_URL",
     os.getenv("BACKEND_URL", "http://localhost:8000"),
-)NONE_OPTION = "— none —"
+)
+NONE_OPTION = "— none —"
 
 st.set_page_config(page_title="Sparkeefy Wingman v0", page_icon="❤️")
 st.title("💙 Sparkeefy Wingman")
