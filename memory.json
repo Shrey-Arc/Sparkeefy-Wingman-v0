@@ -1,120 +1,19 @@
 {
   "Aisha": {
-    "profile": {
-      "id": "rel_aisha_001",
-      "name": "Aisha",
-      "nickname": ["Ash", "Aishu"],
-      "relationship_type": "girlfriend",
-      "relationship_stage": "dating",
-      "duration": "8 months",
-      "age_range": "early 20s",
-      "last_updated": "2026-07-03",
-      "confidence": 0.97,
-      "source": "user_provided"
-    },
-
-    "personality": {
-      "traits": [
-        "emotionally expressive once comfortable",
-        "introverted in unfamiliar groups",
-        "thoughtful",
-        "empathetic",
-        "patient",
-        "slightly anxious when conflicts remain unresolved",
-        "values consistency over grand gestures",
-        "observant of small details",
-        "affectionate in private",
-        "independent"
-      ],
-      "love_languages": [
-        "words of affirmation",
-        "quality time",
-        "thoughtful acts of service"
-      ],
-      "attachment_style": "leans anxious but secure with reassurance"
-    },
-
-    "preferences": {
-      "food": {
-        "favorite_cuisine": ["Thai", "Japanese"],
-        "likes": [
-          "Pad Thai",
-          "green curry",
-          "vegetarian cafés",
-          "dessert cafés"
-        ],
-        "drinks": [
-          "oat milk latte",
-          "iced coffee",
-          "matcha"
-        ],
-        "dislikes": [
-          "very spicy food"
-        ]
-      },
-
-      "flowers": [
-        "sunflowers"
-      ],
-
-      "activities": [
-        "weekend hikes",
-        "sunset walks",
-        "bookstores",
-        "coffee dates",
-        "quiet cafés",
-        "photography",
-        "road trips",
-        "watching movies together"
-      ],
-
-      "gifts": {
-        "likes": [
-          "handwritten notes",
-          "personalized gifts",
-          "photo albums",
-          "small meaningful surprises",
-          "flowers"
-        ],
-        "dislikes": [
-          "expensive flashy gifts",
-          "last-minute gifts"
-        ]
-      }
-    },
-
-    "communication": {
-      "texting_style": [
-        "uses emojis frequently",
-        "short replies during work",
-        "fast replies after 7 PM",
-        "double texts when excited",
-        "shares random photos throughout the day",
-        "likes good morning and good night texts"
-      ],
-
-      "conflict_style": [
-        "withdraws before discussing",
-        "avoids arguments",
-        "needs reassurance before opening up",
-        "responds well to calm conversations"
-      ],
-
-      "appreciates": [
-        "specific compliments",
-        "clear communication",
-        "planned dates",
-        "being updated in advance"
-      ],
-
-      "dislikes": [
-        "mixed signals",
-        "ghosting",
-        "last-minute cancellations",
-        "vague plans"
-      ]
-    },
-
+    "name": "Aisha",
+    "relationship_type": "girlfriend",
+    "relationship_stage": "dating, 8 months",
+    "preferences": [
+      "likes coffee, specifically oat milk lattes",
+      "favorite flower is sunflower",
+      "hates surprises, prefers being told in advance",
+      "loves hiking and being outdoors on weekends",
+      "favorite cuisine is Thai food",
+      "prefers handwritten notes over expensive gifts",
+      "enjoys quiet one-on-one time over group social settings",
+      "likes when plans are structured rather than vague",
+      "prefers emotional consistency over intense but irregular affection"
+    ],
     "important_dates": [
       {
         "title": "Birthday",
@@ -125,219 +24,66 @@
         "date": "2025-11-02"
       }
     ],
-
-    "relationship_notes": [
-      "Had a difficult breakup before this relationship.",
-      "Trust develops slowly but deeply.",
-      "Needs reassurance when overthinking.",
-      "Feels appreciated when remembered through small details.",
-      "Prefers spending uninterrupted quality time over expensive outings.",
-      "Likes discussing future plans together.",
-      "Enjoys spontaneous conversations but dislikes surprise events."
+    "conversation_style": [
+      "uses emojis often but not in every message",
+      "sends short replies during work hours",
+      "replies fast in the evening after 7pm",
+      "double-texts when excited about something",
+      "goes quiet instead of arguing when upset",
+      "responds better to calm tone than emotional escalation",
+      "prefers clarity over ambiguity in conversations"
     ],
-
-    "memory_triggers": {
-      "if_busy": [
-        "Don't assume loss of interest.",
-        "She naturally texts less during work."
-      ],
-
-      "if_upset": [
-        "Give her space first.",
-        "Follow up gently.",
-        "Avoid repeated messages."
-      ],
-
-      "date_planning": [
-        "Offer a specific day and time.",
-        "Mention the location.",
-        "Tell her beforehand instead of surprising her."
-      ],
-
-      "gift_selection": [
-        "Prioritize sentimental value over price."
-      ]
-    },
-
-    "metadata": {
-      "importance": "high",
-      "modifiable": true,
-      "version": "2.0",
-      "tags": [
-        "relationship",
-        "girlfriend",
-        "dating",
-        "memory",
-        "behavioral"
-      ]
-    }
+    "notes": [
+      "gets self-conscious about being 'too much' emotionally, reassurance helps",
+      "had a rough breakup before this relationship, takes trust-building seriously",
+      "values consistency more than intensity in relationships",
+      "withdraws when overwhelmed rather than confronting directly",
+      "responds positively to specific plans instead of open-ended suggestions",
+      "can misinterpret delays as emotional distance if context is missing",
+      "appreciates when partner acknowledges her emotional state without over-analysis"
+    ]
   },
-
   "Raj": {
-    "profile": {
-      "id": "rel_raj_001",
-      "name": "Raj",
-      "nickname": [
-        "RJ",
-        "Bro"
-      ],
-      "relationship_type": "best_friend",
-      "relationship_stage": "friends",
-      "duration": "6 years",
-      "age_range": "mid 20s",
-      "last_updated": "2026-07-03",
-      "confidence": 0.96,
-      "source": "user_provided"
-    },
-
-    "personality": {
-      "traits": [
-        "practical",
-        "dry sense of humor",
-        "competitive",
-        "reliable",
-        "loyal",
-        "calm under pressure",
-        "analytical",
-        "doesn't complain much",
-        "keeps emotions private",
-        "helps when asked"
-      ],
-
-      "friendship_values": [
-        "trust",
-        "honesty",
-        "consistency",
-        "showing up when it matters"
-      ]
-    },
-
-    "preferences": {
-      "food": {
-        "favorite_cuisine": [
-          "Hyderabadi biryani"
-        ],
-        "likes": [
-          "BBQ",
-          "late-night food runs",
-          "chai",
-          "protein-rich meals"
-        ],
-        "dislikes": [
-          "overpriced cafés"
-        ]
-      },
-
-      "sports": [
-        "Football",
-        "Premier League",
-        "Arsenal"
-      ],
-
-      "fitness": [
-        "strength training",
-        "progressive overload",
-        "tracking PRs",
-        "nutrition"
-      ],
-
-      "gaming": [
-        "strategy games",
-        "co-op games",
-        "multiplayer shooters"
-      ],
-
-      "technology": [
-        "PC hardware",
-        "mechanical keyboards",
-        "AI",
-        "gadgets"
-      ]
-    },
-
-    "communication": {
-      "texting_style": [
-        "slow replies on weekdays",
-        "quick replies on weekends",
-        "mostly memes",
-        "voice notes over long texts",
-        "calls when something important happens"
-      ],
-
-      "conflict_style": [
-        "becomes quiet instead of emotional",
-        "prefers direct conversations",
-        "doesn't enjoy unnecessary drama"
-      ],
-
-      "appreciates": [
-        "straightforward honesty",
-        "logical discussions",
-        "practical help"
-      ],
-
-      "dislikes": [
-        "passive aggression",
-        "being rushed",
-        "public praise"
-      ]
-    },
-
+    "name": "Raj",
+    "relationship_type": "best friend",
+    "relationship_stage": "friends since college, 6 years",
+    "preferences": [
+      "into football and follows Arsenal closely",
+      "favorite cuisine is biryani, has strong opinions on where to get it",
+      "prefers voice notes over long texts",
+      "likes gym and tracks his lifts",
+      "into strategy video games on weekends",
+      "enjoys competitive discussion and debating sports tactics",
+      "prefers direct communication over emotional framing",
+      "values efficiency in conversations rather than long explanations"
+    ],
     "important_dates": [
       {
         "title": "Birthday",
         "date": "1999-07-22"
       },
       {
-        "title": "Started New Job",
+        "title": "New job start date",
         "date": "2026-02-01"
       }
     ],
-
-    "life_context": [
-      "Recently started a demanding new job.",
-      "Often mentally exhausted after weekdays.",
-      "Gym has become his stress outlet.",
-      "Usually free for longer conversations on weekends."
+    "conversation_style": [
+      "replies slow on weekdays, fast on weekends",
+      "communicates mostly in memes and one-liners",
+      "goes deep and serious only when something's actually wrong",
+      "rarely initiates plans first but always shows up",
+      "avoids long emotional conversations unless necessary",
+      "uses humor as default communication mode",
+      "responds better to casual tone than formal messaging"
     ],
-
-    "relationship_notes": [
-      "Has planned multiple surprise events successfully.",
-      "Rarely initiates meetups but almost never cancels.",
-      "Will help immediately if someone genuinely needs him.",
-      "Uses humor to hide stress.",
-      "Prefers actions over emotional speeches."
-    ],
-
-    "memory_triggers": {
-      "if_stressed": [
-        "Suggest meeting in person instead of long texting.",
-        "Don't interpret slow replies negatively."
-      ],
-
-      "if_planning": [
-        "Include clear logistics.",
-        "Keep plans practical."
-      ],
-
-      "gift_selection": [
-        "Gym accessories",
-        "Football merchandise",
-        "Tech gadgets",
-        "Good food"
-      ]
-    },
-
-    "metadata": {
-      "importance": "high",
-      "modifiable": true,
-      "version": "2.0",
-      "tags": [
-        "friend",
-        "best_friend",
-        "behavioral",
-        "memory"
-      ]
-    }
+    "notes": [
+      "recently started a new job and has been more stressed than usual",
+      "not big on public displays of appreciation, prefers it said directly one-on-one",
+      "has helped plan two surprise events before, good instincts for logistics",
+      "very loyal friend but emotionally low-expressiveness is normal for him",
+      "becomes more talkative when discussing football or gym progress",
+      "may ignore messages during work but always replies later",
+      "values long-term friendship consistency over frequent communication"
+    ]
   }
 }
