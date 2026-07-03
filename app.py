@@ -27,8 +27,8 @@ from wingman import get_wingman_response
 BACKEND_URL = os.environ.get("WINGMAN_BACKEND_URL", "http://127.0.0.1:8000")
 NONE_OPTION = "— none —"
 
-st.set_page_config(page_title="Sparkeefy Wingman v0", page_icon="💬")
-st.title("💬 Sparkeefy AI Wingman — v0")
+st.set_page_config(page_title="Sparkeefy Wingman v0", page_icon="❤️")
+st.title("❤️ Sparkeefy AI Wingman — v0 ❤️")
 
 mm = MemoryManager()
 relationships = mm.list_relationships() or ["Aisha"]

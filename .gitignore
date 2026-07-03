@@ -1,4 +1,7 @@
 cache.json 
 evaluation_filled.csv
 fallback_debug.log
+.env
+__pycache__/
+*.pyc
 results.jsonl

@@ -75,33 +75,75 @@ def fill_sheet(results: list, template_path: str, out_path: str):
         rows = list(csv.reader(f))
 
     header = rows[0]
-    # Add a relationship column if the template doesn't already have one
-    if "relationship" not in header:
-        header.append("relationship")
+
+    # Add columns if they don't already exist
+    additions = [
+        "relationship",
+        "suggested_messages",
+        "follow_up_question",
+    ]
+
+    for col in additions:
+        if col not in header:
+            if col == "suggested_messages" and "wingman_response" in header:
+                # Insert immediately after wingman_response
+                idx = header.index("wingman_response") + 1
+                header.insert(idx, col)
+            elif col == "follow_up_question" and "suggested_messages" in header:
+                idx = header.index("suggested_messages") + 1
+                header.insert(idx, col)
+            else:
+                header.append(col)
+
     idx = {name: i for i, name in enumerate(header)}
 
     filled_rows = [header]
+
     for row in rows[1:]:
         row = row + [""] * (len(header) - len(row))
+
         row_id = int(row[idx["id"]])
         r = by_id.get(row_id)
+
         if r:
             row[idx["prompt"]] = r["prompt"]
+
             if r.get("schema_valid"):
-                row[idx["wingman_response"]] = r["output"]["wingman_response"]
+                output = r["output"]
+
+                row[idx["wingman_response"]] = output["wingman_response"]
+
+                row[idx["suggested_messages"]] = " | ".join(
+                    output.get("suggested_messages", [])
+                )
+
+                row[idx["follow_up_question"]] = (
+                    output.get("follow_up_question") or ""
+                )
+
             else:
-                row[idx["wingman_response"]] = f"[FAILED: {r.get('error', 'unknown')}]"
-            row[idx["response_time_sec"]] = str(r.get("response_time_sec", ""))
+                row[idx["wingman_response"]] = (
+                    f"[FAILED: {r.get('error', 'unknown')}]"
+                )
+
+            row[idx["response_time_sec"]] = str(
+                r.get("response_time_sec", "")
+            )
+
             row[idx["relationship"]] = r.get("relationship", "")
+
         filled_rows.append(row)
 
     with open(out_path, "w", encoding="utf-8", newline="") as f:
         csv.writer(f).writerows(filled_rows)
 
     print(f"Filled sheet written to {out_path}")
-    print("Objective columns (prompt, response, time, relationship) are filled in.")
-    print("Score columns (1-5 ratings, safety pass/fail, notes) are still yours to judge by hand.")
-
+    print(
+        "Filled: prompt, response, suggested messages, follow-up question, response time, relationship."
+    )
+    print(
+        "Score columns (1-5 ratings, safety pass/fail, notes) remain for manual evaluation."
+    )
 
 def main():
     parser = argparse.ArgumentParser()
